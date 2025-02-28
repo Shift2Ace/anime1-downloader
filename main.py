@@ -1,9 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 import requests
 import json
@@ -31,10 +28,10 @@ edge_options = Options()
 edge_options.add_argument("--headless")
 edge_options.add_argument("--disable-gpu")
 edge_options.add_argument("--no-sandbox")
+edge_options.add_argument("--mute-audio")
 
 # Initialize the WebDriver with the headless option
 driver = webdriver.Edge(options=edge_options)
-driver = webdriver.Edge()
 driver.get(url)
 
 # Give the page some time to load
@@ -84,7 +81,6 @@ for i in range(n_video):
             time.sleep(0.5)
             video = article.find_element(By.TAG_NAME, 'video')     
             video_src = video.get_attribute('src')
-        print(f'The video source URL is: {video_src}')
         
         # Open video src
         driver.get(video_src)
