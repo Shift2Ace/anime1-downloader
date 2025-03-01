@@ -37,7 +37,7 @@ edge_options.add_argument("--disable-gpu")
 edge_options.add_argument("--no-sandbox")
 edge_options.add_argument("--mute-audio")
 
-driver = webdriver.Edge(options=edge_options)
+
 
 def main():
     try:
@@ -46,7 +46,7 @@ def main():
             url = input("Web url ('exit' to quit): ")
             if url.lower() in ["exit", "quit"]:
                 break
-
+            driver = webdriver.Edge(options=edge_options)
             # Initialize the WebDriver with the headless option
             print(f"Access {url}")
             driver.get(url)
@@ -121,7 +121,7 @@ def main():
             for process in processes:
                 process.join()
 
-            time.sleep(wait_time)
+            driver.quit()
     finally:
         # Close the WebDriver
         driver.quit()
